@@ -23,38 +23,38 @@ class LoginDialog(QDialog):
     def __init__(self):
         super().__init__()
 
-        # Настройка основного окна
-        self.setWindowTitle("Авторизация")
+        # РќР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
+        self.setWindowTitle("РђРІС‚РѕСЂРёР·Р°С†РёСЏ")
         self.setFixedSize(200, 200)
         self.setWindowIcon(QIcon("aaa.png"))
         self.setStyleSheet("background-color: #FFFFFF; font-family: Segoe UI")
 
         layout = QVBoxLayout(self)
 
-        # Создание и настройка логотипа
+        # РЎРѕР·РґР°РЅРёРµ Рё РЅР°СЃС‚СЂРѕР№РєР° Р»РѕРіРѕС‚РёРїР°
         logo = QLabel()
         logo.setPixmap(QPixmap("aaa.png").scaled(150, 50, Qt.AspectRatioMode.KeepAspectRatio))
         layout.addWidget(logo, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        # Поля для ввода логина и пароля
+        # РџРѕР»СЏ РґР»СЏ РІРІРѕРґР° Р»РѕРіРёРЅР° Рё РїР°СЂРѕР»СЏ
         self.login = QLineEdit()
         self.passw = QLineEdit()
         self.passw.setEchoMode(QLineEdit.EchoMode.Password)
 
-        # Форма для полей ввода
+        # Р¤РѕСЂРјР° РґР»СЏ РїРѕР»РµР№ РІРІРѕРґР°
         form = QFormLayout()
-        form.addRow("Логин:", self.login)
-        form.addRow("Пароль:", self.passw)
+        form.addRow("Р›РѕРіРёРЅ:", self.login)
+        form.addRow("РџР°СЂРѕР»СЊ:", self.passw)
         layout.addLayout(form)
 
-        # Кнопка входа
-        btn = QPushButton("Войти")
+        # РљРЅРѕРїРєР° РІС…РѕРґР°
+        btn = QPushButton("Р’РѕР№С‚Рё")
         btn.clicked.connect(self.verifi)
         layout.addWidget(btn)
 
         btn.setStyleSheet("background: #67BA80; color: white; padding: 5px;")
 
-    #Метод для проверки авторизации пользователя
+    #РњРµС‚РѕРґ РґР»СЏ РїСЂРѕРІРµСЂРєРё Р°РІС‚РѕСЂРёР·Р°С†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     def verifi(self):
         try:
             with get_db_connection() as conn:
@@ -64,9 +64,9 @@ class LoginDialog(QDialog):
                     if cur.fetchone():
                         self.accept()
                     else:
-                        QMessageBox.critical(self, "Ошибка", "Неправильный логин или пароль, возможно вы не заполнили поля")
+                        QMessageBox.critical(self, "РћС€РёР±РєР°", "РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ, РІРѕР·РјРѕР¶РЅРѕ РІС‹ РЅРµ Р·Р°РїРѕР»РЅРёР»Рё РїРѕР»СЏ")
         except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+            QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
 
 
@@ -93,31 +93,31 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        #Настройка основного окна
-        self.setWindowTitle("Главное окно продукции")
+        #РќР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
+        self.setWindowTitle("Р“Р»Р°РІРЅРѕРµ РѕРєРЅРѕ РїСЂРѕРґСѓРєС†РёРё")
         self.setFixedSize(900, 600)
         self.setWindowIcon(QIcon("aaa.png"))
         self.setStyleSheet("background-color: #FFFFFF; font-family: Segoe UI")
 
         layout = QVBoxLayout(self)
 
-        #Добавление логотипа
+        #Р”РѕР±Р°РІР»РµРЅРёРµ Р»РѕРіРѕС‚РёРїР°
         logo = QLabel()
         logo.setPixmap(QPixmap("aaa.png").scaled(150, 50, Qt.AspectRatioMode.KeepAspectRatio))
         layout.addWidget(logo, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        #Создание таблицы для отображения продукции
+        #РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РїСЂРѕРґСѓРєС†РёРё
         self.table = QTableWidget(0, 7)
-        self.table.setHorizontalHeaderLabels(["Номер продукта", "Название", "Тип продукта", "Артикул", "Мин. цена для партнера", "Тип материала", "Время изготовления"])
+        self.table.setHorizontalHeaderLabels(["РќРѕРјРµСЂ РїСЂРѕРґСѓРєС‚Р°", "РќР°Р·РІР°РЅРёРµ", "РўРёРї РїСЂРѕРґСѓРєС‚Р°", "РђСЂС‚РёРєСѓР»", "РњРёРЅ. С†РµРЅР° РґР»СЏ РїР°СЂС‚РЅРµСЂР°", "РўРёРї РјР°С‚РµСЂРёР°Р»Р°", "Р’СЂРµРјСЏ РёР·РіРѕС‚РѕРІР»РµРЅРёСЏ"])
         layout.addWidget(self.table)
 
         btn_la = QHBoxLayout()
 
-        #Создание кнопок для управления
-        add_pr = QPushButton("Добавить продукт")
-        dlt_pr = QPushButton("Удалить продукт")
-        edit_pr = QPushButton("Редактировать продукт")
-        ceh = QPushButton("Посмотреть цеха")
+        #РЎРѕР·РґР°РЅРёРµ РєРЅРѕРїРѕРє РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ
+        add_pr = QPushButton("Р”РѕР±Р°РІРёС‚СЊ РїСЂРѕРґСѓРєС‚")
+        dlt_pr = QPushButton("РЈРґР°Р»РёС‚СЊ РїСЂРѕРґСѓРєС‚")
+        edit_pr = QPushButton("Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РїСЂРѕРґСѓРєС‚")
+        ceh = QPushButton("РџРѕСЃРјРѕС‚СЂРµС‚СЊ С†РµС…Р°")
 
         add_pr.clicked.connect(self.add_pr)
         dlt_pr.clicked.connect(self.dlt_pr)
@@ -136,14 +136,14 @@ class MainWindow(QWidget):
 
         layout.addLayout(btn_la)
 
-        #Загрузка данных в таблицу
+        #Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РІ С‚Р°Р±Р»РёС†Сѓ
         self.load()
 
-    #Метод для редактирования выбранного продукта
+    #РњРµС‚РѕРґ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РїСЂРѕРґСѓРєС‚Р°
     def edit_pr(self):
         selected_row = self.table.currentRow()
         if selected_row < 0:
-            QMessageBox.warning(self, "Ошибка", "Выберите продукт для редактирования")
+            QMessageBox.warning(self, "РћС€РёР±РєР°", "Р’С‹Р±РµСЂРёС‚Рµ РїСЂРѕРґСѓРєС‚ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ")
             return
 
         product_id = self.table.item(selected_row, 0).text()
@@ -155,7 +155,7 @@ class MainWindow(QWidget):
                     product_data = cur.fetchone()
 
                     if not product_data:
-                        QMessageBox.warning(self, "Ошибка", "Продукт не найден")
+                        QMessageBox.warning(self, "РћС€РёР±РєР°", "РџСЂРѕРґСѓРєС‚ РЅРµ РЅР°Р№РґРµРЅ")
                         return
 
                     dialog = AddProduct()
@@ -193,14 +193,14 @@ class MainWindow(QWidget):
                             conn.commit()
                             self.load()
         except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных: {e}")
+            QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…: {e}")
 
-    #Метод для открытия окна управления цехами
+    #РњРµС‚РѕРґ РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ РѕРєРЅР° СѓРїСЂР°РІР»РµРЅРёСЏ С†РµС…Р°РјРё
     def ceh(self):
         window = Ceh()
         window.exec()
 
-    #Метод загрузки данных о продукции в таблицу
+    #РњРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… Рѕ РїСЂРѕРґСѓРєС†РёРё РІ С‚Р°Р±Р»РёС†Сѓ
     def load(self):
         self.table.setRowCount(0)
         try:
@@ -222,9 +222,9 @@ class MainWindow(QWidget):
                         self.table.setItem(row_pos, 5, QTableWidgetItem(row["name_material"]))
                         self.table.setItem(row_pos, 6, QTableWidgetItem(row["vremya"]))
         except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+            QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
-    #Метод для добавления нового продукта
+    #РњРµС‚РѕРґ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ РїСЂРѕРґСѓРєС‚Р°
     def add_pr(self):
         dialog = AddProduct()
         if dialog.exec():
@@ -238,9 +238,9 @@ class MainWindow(QWidget):
                             conn.commit()
                             self.load()
                 except Exception as e:
-                    QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+                    QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
-    #Метод для удаления продукта
+    #РњРµС‚РѕРґ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїСЂРѕРґСѓРєС‚Р°
     def dlt_pr(self):
         scrld = self.table.currentRow()
         if scrld >=0:
@@ -252,7 +252,7 @@ class MainWindow(QWidget):
                         conn.commit()
                         self.load()
             except Exception as e:
-                QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+                QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
 
 
@@ -273,25 +273,25 @@ class Ceh(QDialog):
     def __init__(self):
         super().__init__()
 
-        #Настройка основного окна
-        self.setWindowTitle("Окно цехов")
+        #РќР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
+        self.setWindowTitle("РћРєРЅРѕ С†РµС…РѕРІ")
         self.setFixedSize(500, 400)
         self.setWindowIcon(QIcon("aaa.png"))
         self.setStyleSheet("background-color: #FFFFFF; font-family: Segoe UI")
 
         layout = QVBoxLayout(self)
 
-        #Создание таблицы для отображения цехов
+        #РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С†РµС…РѕРІ
         self.table = QTableWidget(0, 4)
-        self.table.setHorizontalHeaderLabels (["Номер цеха", "Название цеха", "Количество человек", "Время затраченное на реализацию"])
+        self.table.setHorizontalHeaderLabels (["РќРѕРјРµСЂ С†РµС…Р°", "РќР°Р·РІР°РЅРёРµ С†РµС…Р°", "РљРѕР»РёС‡РµСЃС‚РІРѕ С‡РµР»РѕРІРµРє", "Р’СЂРµРјСЏ Р·Р°С‚СЂР°С‡РµРЅРЅРѕРµ РЅР° СЂРµР°Р»РёР·Р°С†РёСЋ"])
         layout.addWidget(self.table)
 
         btn_la = QHBoxLayout()
 
-        #Создание кнопок управления
-        add_c = QPushButton("Добавить цех")
-        dlt_c = QPushButton("Удалить цех")
-        edit_c = QPushButton("Редактировать цех")
+        #РЎРѕР·РґР°РЅРёРµ РєРЅРѕРїРѕРє СѓРїСЂР°РІР»РµРЅРёСЏ
+        add_c = QPushButton("Р”РѕР±Р°РІРёС‚СЊ С†РµС…")
+        dlt_c = QPushButton("РЈРґР°Р»РёС‚СЊ С†РµС…")
+        edit_c = QPushButton("Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С†РµС…")
 
         add_c.clicked.connect(self.add_c)
         dlt_c.clicked.connect(self.dlt_c)
@@ -307,14 +307,14 @@ class Ceh(QDialog):
 
         layout.addLayout(btn_la)
 
-        #Загрузка данных в таблицу
+        #Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РІ С‚Р°Р±Р»РёС†Сѓ
         self.load()
 
-    #Метод для редактирования выбранного цеха
+    #РњРµС‚РѕРґ РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С†РµС…Р°
     def edit_c(self):
         selected_row = self.table.currentRow()
         if selected_row < 0:
-            QMessageBox.warning(self, "Ошибка", "Выберите цех для редактирования")
+            QMessageBox.warning(self, "РћС€РёР±РєР°", "Р’С‹Р±РµСЂРёС‚Рµ С†РµС… РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ")
             return
 
         ceh_id = self.table.item(selected_row, 0).text()
@@ -326,7 +326,7 @@ class Ceh(QDialog):
                     ceh_data = cur.fetchone()
 
                     if not ceh_data:
-                        QMessageBox.warning(self, "Ошибка", "Цех не найден")
+                        QMessageBox.warning(self, "РћС€РёР±РєР°", "Р¦РµС… РЅРµ РЅР°Р№РґРµРЅ")
                         return
 
                     dialog = AddCeh()
@@ -346,9 +346,9 @@ class Ceh(QDialog):
                             conn.commit()
                             self.load()
         except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных: {e}")
+            QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…: {e}")
 
-    #Метод загрузки данных о цехах в таблицу
+    #РњРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… Рѕ С†РµС…Р°С… РІ С‚Р°Р±Р»РёС†Сѓ
     def load(self):
         self.table.setRowCount(0)
         try:
@@ -364,9 +364,9 @@ class Ceh(QDialog):
                         self.table.setItem(row_pos, 2, QTableWidgetItem(row["chelovek"]))
                         self.table.setItem(row_pos, 3, QTableWidgetItem(row["vremya"]))
         except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+            QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
-    #Метод для добавления нового цеха
+    #РњРµС‚РѕРґ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ С†РµС…Р°
     def add_c(self):
         dialog = AddCeh()
         if dialog.exec():
@@ -380,9 +380,9 @@ class Ceh(QDialog):
                             conn.commit()
                             self.load()
                 except Exception as e:
-                    QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+                    QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
-    #Метод для удаления цеха
+    #РњРµС‚РѕРґ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ С†РµС…Р°
     def dlt_c(self):
         scrld = self.table.currentRow()
         if scrld >=0:
@@ -394,7 +394,7 @@ class Ceh(QDialog):
                         conn.commit()
                         self.load()
             except Exception as e:
-                QMessageBox.critical(self, "Ошибка", f"Ошибка базы данных:{e}")
+                QMessageBox.critical(self, "РћС€РёР±РєР°", f"РћС€РёР±РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С…:{e}")
 
 
 
@@ -411,42 +411,42 @@ class AddCeh(QDialog):
     def __init__(self):
         super().__init__()
 
-        # Настройка основного окна
-        self.setWindowTitle("Добавление цеха")
+        # РќР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
+        self.setWindowTitle("Р”РѕР±Р°РІР»РµРЅРёРµ С†РµС…Р°")
         self.setFixedSize(500, 500)
         self.setWindowIcon(QIcon("aaa.png"))
         self.setStyleSheet("background-color: #FFFFFF; font-family: Segoe UI")
 
         layout = QVBoxLayout(self)
 
-        # Создание полей ввода
+        # РЎРѕР·РґР°РЅРёРµ РїРѕР»РµР№ РІРІРѕРґР°
         self.name = QLineEdit()
         self.chelovek = QLineEdit()
         self.vremya = QLineEdit()
 
-        # Добавление подписей и полей ввода в layout
-        layout.addWidget(QLabel("Введите название цеха:"))
+        # Р”РѕР±Р°РІР»РµРЅРёРµ РїРѕРґРїРёСЃРµР№ Рё РїРѕР»РµР№ РІРІРѕРґР° РІ layout
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С†РµС…Р°:"))
         layout.addWidget(self.name)
 
-        layout.addWidget(QLabel("Введите количество человек в цеху:"))
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‡РµР»РѕРІРµРє РІ С†РµС…Сѓ:"))
         layout.addWidget(self.chelovek)
 
-        layout.addWidget(QLabel("Введите время на создание в минутах:"))
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ РІСЂРµРјСЏ РЅР° СЃРѕР·РґР°РЅРёРµ РІ РјРёРЅСѓС‚Р°С…:"))
         layout.addWidget(self.vremya)
 
-        # Создание и настройка кнопки сохранения
-        btn = QPushButton("Сохранить")
+        # РЎРѕР·РґР°РЅРёРµ Рё РЅР°СЃС‚СЂРѕР№РєР° РєРЅРѕРїРєРё СЃРѕС…СЂР°РЅРµРЅРёСЏ
+        btn = QPushButton("РЎРѕС…СЂР°РЅРёС‚СЊ")
         btn.clicked.connect(self.save)
         layout.addWidget(btn)
         btn.setStyleSheet("background: #67BA80; color: white; padding: 5px;")
 
-        # Флаг успешного сохранения
+        # Р¤Р»Р°Рі СѓСЃРїРµС€РЅРѕРіРѕ СЃРѕС…СЂР°РЅРµРЅРёСЏ
         self.success = False
 
     def save(self):
-        # Проверка, что все поля заполнены
+        # РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РІСЃРµ РїРѕР»СЏ Р·Р°РїРѕР»РЅРµРЅС‹
         if not self.name.text() or not self.chelovek.text() or not self.vremya.text():
-            QMessageBox.critical(self, "Ошибка заполнения полей", "Заполните все поля")
+            QMessageBox.critical(self, "РћС€РёР±РєР° Р·Р°РїРѕР»РЅРµРЅРёСЏ РїРѕР»РµР№", "Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ")
             return
 
         self.success = True
@@ -475,15 +475,15 @@ class AddProduct(QDialog):
     def __init__(self):
         super().__init__()
 
-        # Настройка основного окна
-        self.setWindowTitle("Добавление продукта")
+        # РќР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
+        self.setWindowTitle("Р”РѕР±Р°РІР»РµРЅРёРµ РїСЂРѕРґСѓРєС‚Р°")
         self.setFixedSize(300, 300)
         self.setWindowIcon(QIcon("aaa.png"))
         self.setStyleSheet("background-color: #FFFFFF; font-family: Segoe UI")
 
         layout = QVBoxLayout(self)
 
-        # Создание полей ввода и выбора
+        # РЎРѕР·РґР°РЅРёРµ РїРѕР»РµР№ РІРІРѕРґР° Рё РІС‹Р±РѕСЂР°
         self.name = QLineEdit()
         self.tip_pr = QComboBox()
         self.articul = QLineEdit()
@@ -491,7 +491,7 @@ class AddProduct(QDialog):
         self.tip_mat = QComboBox()
         self.ceh = QComboBox()
 
-        #Заполнение выпадающих списков
+        #Р—Р°РїРѕР»РЅРµРЅРёРµ РІС‹РїР°РґР°СЋС‰РёС… СЃРїРёСЃРєРѕРІ
         with get_db_connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("select id, name_product from tip_product")
@@ -510,27 +510,27 @@ class AddProduct(QDialog):
                 for row in cur.fetchall():
                     self.ceh.addItem(row["name_ceh"], row["id"])
 
-        # Добавление элементов в layout с подписями
-        layout.addWidget(QLabel("Введите название продукта:"))
+        # Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ РІ layout СЃ РїРѕРґРїРёСЃСЏРјРё
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р°:"))
         layout.addWidget(self.name)
 
-        layout.addWidget(QLabel("Выберите тип родукта:"))
+        layout.addWidget(QLabel("Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї СЂРѕРґСѓРєС‚Р°:"))
         layout.addWidget(self.tip_pr)
 
-        layout.addWidget(QLabel("Введите артикул:"))
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ Р°СЂС‚РёРєСѓР»:"))
         layout.addWidget(self.articul)
 
-        layout.addWidget(QLabel("Введите минимальную стоимость для партнера:"))
+        layout.addWidget(QLabel("Р’РІРµРґРёС‚Рµ РјРёРЅРёРјР°Р»СЊРЅСѓСЋ СЃС‚РѕРёРјРѕСЃС‚СЊ РґР»СЏ РїР°СЂС‚РЅРµСЂР°:"))
         layout.addWidget(self.min)
 
-        layout.addWidget(QLabel("Выберите тип материала:"))
+        layout.addWidget(QLabel("Р’С‹Р±РµСЂРёС‚Рµ С‚РёРї РјР°С‚РµСЂРёР°Р»Р°:"))
         layout.addWidget(self.tip_mat)
 
-        layout.addWidget(QLabel("Выберите цех изготовитель:"))
+        layout.addWidget(QLabel("Р’С‹Р±РµСЂРёС‚Рµ С†РµС… РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ:"))
         layout.addWidget(self.ceh)
 
-        # Кнопка сохранения
-        btn = QPushButton("Сохранить")
+        # РљРЅРѕРїРєР° СЃРѕС…СЂР°РЅРµРЅРёСЏ
+        btn = QPushButton("РЎРѕС…СЂР°РЅРёС‚СЊ")
         btn.clicked.connect(self.save)
 
         btn.setStyleSheet("background: #67BA80; color: white; padding: 5px;")
@@ -540,9 +540,9 @@ class AddProduct(QDialog):
         self.success = False
 
     def save(self):
-        # Проверка, что все поля заполнены
+        # РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РІСЃРµ РїРѕР»СЏ Р·Р°РїРѕР»РЅРµРЅС‹
         if not self.name.text() or not self.articul.text() or not self.min.text():
-            QMessageBox.critical(self, "Ошибка заполнения полей", "Заполните все поля")
+            QMessageBox.critical(self, "РћС€РёР±РєР° Р·Р°РїРѕР»РЅРµРЅРёСЏ РїРѕР»РµР№", "Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ")
             return
         self.success = True
         self.accept()
@@ -590,66 +590,66 @@ pip freeze > requirements.txt
 
 
 
-# Система управления производством для мебельной фабрики (PyQt6 + MySQL)
+# РЎРёСЃС‚РµРјР° СѓРїСЂР°РІР»РµРЅРёСЏ РїСЂРѕРёР·РІРѕРґСЃС‚РІРѕРј РґР»СЏ РјРµР±РµР»СЊРЅРѕР№ С„Р°Р±СЂРёРєРё (PyQt6 + MySQL)
 
-## Функционал
+## Р¤СѓРЅРєС†РёРѕРЅР°Р»
 
-### Основные модули
-1. Авторизация
-   - Вход по логину/паролю
-   - Проверка прав доступа
-
-
-2. Управление цехами
-   - Добавление/удаление цехов
-   - Редактирование параметров:
-     - Название цеха
-     - Количество работников
-     - Время производства
+### РћСЃРЅРѕРІРЅС‹Рµ РјРѕРґСѓР»Рё
+1. РђРІС‚РѕСЂРёР·Р°С†РёСЏ
+   - Р’С…РѕРґ РїРѕ Р»РѕРіРёРЅСѓ/РїР°СЂРѕР»СЋ
+   - РџСЂРѕРІРµСЂРєР° РїСЂР°РІ РґРѕСЃС‚СѓРїР°
 
 
-3. Управление продукцией
-   - Каталог изделий
-   - Добавление новых продуктов:
-     - Название
-     - Артикул
-     - Тип продукта
-     - Материал
-     - Цех-изготовитель
-   - Редактирование и удаление
+2. РЈРїСЂР°РІР»РµРЅРёРµ С†РµС…Р°РјРё
+   - Р”РѕР±Р°РІР»РµРЅРёРµ/СѓРґР°Р»РµРЅРёРµ С†РµС…РѕРІ
+   - Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ:
+     - РќР°Р·РІР°РЅРёРµ С†РµС…Р°
+     - РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‚РЅРёРєРѕРІ
+     - Р’СЂРµРјСЏ РїСЂРѕРёР·РІРѕРґСЃС‚РІР°
 
 
-4. Работа с БД
-   - Хранение данных:
-     - Цехи
-     - Продукция
-     - Материалы
-     - Пользователи
+3. РЈРїСЂР°РІР»РµРЅРёРµ РїСЂРѕРґСѓРєС†РёРµР№
+   - РљР°С‚Р°Р»РѕРі РёР·РґРµР»РёР№
+   - Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІС‹С… РїСЂРѕРґСѓРєС‚РѕРІ:
+     - РќР°Р·РІР°РЅРёРµ
+     - РђСЂС‚РёРєСѓР»
+     - РўРёРї РїСЂРѕРґСѓРєС‚Р°
+     - РњР°С‚РµСЂРёР°Р»
+     - Р¦РµС…-РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ
+   - Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Рё СѓРґР°Р»РµРЅРёРµ
 
 
-## Быстрый старт
+4. Р Р°Р±РѕС‚Р° СЃ Р‘Р”
+   - РҐСЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С…:
+     - Р¦РµС…Рё
+     - РџСЂРѕРґСѓРєС†РёСЏ
+     - РњР°С‚РµСЂРёР°Р»С‹
+     - РџРѕР»СЊР·РѕРІР°С‚РµР»Рё
+
+
+## Р‘С‹СЃС‚СЂС‹Р№ СЃС‚Р°СЂС‚
 ```bash
-# Установка зависимостей
+# РЈСЃС‚Р°РЅРѕРІРєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
 pip install -r requirements.txt
 
-# Запуск приложения
+# Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ
 python main.py
 
 
 
 
 
-# Перейдите в папку проекта
+# РџРµСЂРµР№РґРёС‚Рµ РІ РїР°РїРєСѓ РїСЂРѕРµРєС‚Р°
 
 git init
 
 git add .
 
-git commit -m "приложение"
+git commit -m "РїСЂРёР»РѕР¶РµРЅРёРµ"
 
 git remote add origin https://github.com/YaroslavSilyanov/prob
 
 git push -u origin main
 
-# Если ветка называется master:
+# Р•СЃР»Рё РІРµС‚РєР° РЅР°Р·С‹РІР°РµС‚СЃСЏ master:
 git push -u origin master
