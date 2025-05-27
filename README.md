@@ -67,3 +67,8 @@
 pip install pyinstaller
 pyinstaller --onefile --windowed main.py
 ```
+
+## Очиста терминала
+```angular2html
+Remove-Item -Path (Get-PSReadLineOption).HistorySavePath
+```
